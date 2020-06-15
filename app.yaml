@@ -1,0 +1,7 @@
+runtime: nodejs10
+service: dev-ioled-api
+env_variables:
+  JWT_KEY: ""
+  GOOGLE_CLIENT_SECRET: ""
+  GOOGLE_CLIENT_ID: ""
+  PROJECT_ID: ""

@@ -31,7 +31,7 @@ jobs:
       - name: Prepare app.yaml
         uses: mikefarah/yq@3.2.1
         with:
-          cmd: yq w -i app.yaml service dev-api-gateway
+          cmd: yq w -i app.yaml service dev-ioled-api
       - name: Run deployment
         uses: actions-hub/gcloud@master
         env:
