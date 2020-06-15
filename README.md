@@ -18,7 +18,7 @@
 |  1  | /user/currentUser | **GET** | Returns the current authenticated user               | No                      |
 |  2  | /user/devices     | **GET** | List all the registered devices for the current user | No                      |
 
-### Device Control
+### Device
 
 | N°  | Query              | Method   | Response                 | Only available to admin |
 | :-: | ------------------ | -------- | ------------------------ | ----------------------- |
