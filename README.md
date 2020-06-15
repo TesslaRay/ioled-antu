@@ -22,4 +22,4 @@
 
 | N°  | Query              | Method   | Response                 | Only available to admin |
 | :-: | ------------------ | -------- | ------------------------ | ----------------------- |
-|  1  | /device/saveDevice | **POST** | Save device in Firestore | NO                      |
+|  1  | /device/saveDevice | **POST** | Save device in Firestore | No                      |
