@@ -28,6 +28,11 @@ deploy-dev dev:
 
 run r:
 	@echo "[Running] Running service with $(ENV)"
-	@PORT=$(PORT) GOOGLE_APPLICATION_CREDENTIALS="./google-cloud-service-account.json" JWT_KEY="$(JWT_KEY)" PROJECT_ID="$(PROJECT_ID)" GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" GOOGLE_CLIENT_ID="$(GOOGLE_CLIENT_ID)" node src/index.js
+	@PORT=$(PORT) GOOGLE_APPLICATION_CREDENTIALS="./google-cloud-service-account.json" JWT_KEY="$(JWT_KEY)" PROJECT_ID="$(PROJECT_ID)" GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" GOOGLE_CLIENT_ID="$(GOOGLE_CLIENT_ID)" node src/start.js
 
+
+test t:
+	@echo "[TEST] Testing"
+	@npm test
+	
 .PHONY: version v init i deploy d run r

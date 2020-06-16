@@ -4,8 +4,8 @@
   "description": "ioled API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "test": "cross-env NODE_ENV=env-dev jest --testTimeout=10000",
+    "start": "node src/start.js"
   },
   "repository": {
     "type": "git",
@@ -20,20 +20,26 @@
   "dependencies": {
     "@google-cloud/firestore": "^3.5.1",
     "@google-cloud/iot": "^1.5.0",
-    "googleapis": "^46.0.0",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "*",
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "googleapis": "^46.0.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
     "passport": "^0.4.1",
-    "passport-google-oauth20": "^2.0.0",
-    "lodash": "^4.17.15"
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "jest": "^26.0.1",
+    "supertest": "^4.0.2"
   }
 }

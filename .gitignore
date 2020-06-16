@@ -2,3 +2,4 @@
 env-dev.json
 google-cloud-service-account.json
 app-dev.yaml
+.env.json
