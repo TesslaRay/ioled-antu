@@ -1,4 +1,4 @@
-const { ioledAPI } = require("./index");
+const ioledAPI = require("./index.js");
 
 const PORT = process.env.PORT;
 

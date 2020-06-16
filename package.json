@@ -4,7 +4,7 @@
   "description": "ioled API",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=env-dev jest --testTimeout=10000",
+    "test": "jest",
     "start": "node src/start.js"
   },
   "repository": {

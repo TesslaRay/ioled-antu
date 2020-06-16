@@ -33,6 +33,6 @@ run r:
 
 test t:
 	@echo "[TEST] Testing"
-	@npm test
+	@PORT=$(PORT) GOOGLE_APPLICATION_CREDENTIALS="./google-cloud-service-account.json" JWT_KEY="$(JWT_KEY)" PROJECT_ID="$(PROJECT_ID)" GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" GOOGLE_CLIENT_ID="$(GOOGLE_CLIENT_ID)" npm test
 	
 .PHONY: version v init i deploy d run r

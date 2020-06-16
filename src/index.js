@@ -13,6 +13,4 @@ require("./services/passport");
 ioledAPI.use(cors);
 expressConfig(ioledAPI);
 
-module.exports = {
-  ioledAPI,
-};
+module.exports = ioledAPI;
