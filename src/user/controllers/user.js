@@ -1,4 +1,4 @@
-const {getUser, getDevices} = require('../../services/firestore');
+const { getUser, getDevices } = require("../../services/firestore");
 
 /**
  * @CristianValdivia
@@ -7,23 +7,25 @@ const {getUser, getDevices} = require('../../services/firestore');
  * @param {object} res Response.
  */
 exports.currentUser = async (req, res) => {
-  console.log('[iOLED-API][user][currentUser][Request] '.cyan, req.body);
-  const {user} = req.body;
+  console.log("[iOLED-API][user][currentUser][Request] ", req.body);
+  const { user } = req.body;
   const googleID = user;
 
   // If user is not authenticated, return null.
   if (!googleID) {
-    console.log('[iOLED-API][user][currentUser][Error]'.cyan, {error: 'User not logged in'});
-    res.status(500).json({error: 'User not logged in'});
+    console.log("[iOLED-API][user][currentUser][Error]", {
+      error: "User not logged in",
+    });
+    res.status(500).json({ error: "User not logged in" });
   } else {
     try {
       // Search in the DB for the user.
-      const {user: userInfo} = await getUser(googleID);
+      const { user: userInfo } = await getUser(googleID);
 
-      console.log('[iOLED-API][user][currentUser][Response]'.cyan, userInfo);
-      res.status(200).send({currentUser: userInfo});
+      console.log("[iOLED-API][user][currentUser][Response]", userInfo);
+      res.status(200).send({ currentUser: userInfo });
     } catch (err) {
-      console.log('[iOLED-API][user][currentUser][Error]'.cyan, err);
+      console.log("[iOLED-API][user][currentUser][Error]", err);
       res.status(500).json(err);
     }
   }
@@ -37,23 +39,25 @@ exports.currentUser = async (req, res) => {
  * @param {object} res Response.
  */
 exports.getDevices = async (req, res) => {
-  console.log('[iOLED-API][user][getDevices][Request]'.cyan), req.body;
-  const {user} = req.body;
+  console.log("[iOLED-API][user][getDevices][Request]"), req.body;
+  const { user } = req.body;
   const googleID = user;
 
   // If user is not authenticated, return null.
   if (!googleID) {
-    console.log('[iOLED-API][user][getDevices][Error]'.cyan, {error: 'User not logged in'});
-    res.status(500).json({error: 'User not logged in'});
+    console.log("[iOLED-API][user][getDevices][Error]", {
+      error: "User not logged in",
+    });
+    res.status(500).json({ error: "User not logged in" });
   } else {
     try {
       // Search in the DB for the devices.
       const devices = await getDevices(googleID);
 
-      console.log('[iOLED-API][user][getDevices][Response]'.cyan, devices);
-      res.status(200).send({userDevices: devices});
+      console.log("[iOLED-API][user][getDevices][Response]", devices);
+      res.status(200).send({ userDevices: devices });
     } catch (error) {
-      console.log('[iOLED-API][user][getDevices][Error]'.cyan, error);
+      console.log("[iOLED-API][user][getDevices][Error]", error);
       res.status(500).json(error);
     }
   }

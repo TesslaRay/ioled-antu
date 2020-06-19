@@ -1,21 +1,27 @@
-const Firestore = require("@google-cloud/firestore");
+const { PROJECT_ID } = require("../config/env");
 
-const { projectId } = require("../config/env");
+let config = {
+  projectId: PROJECT_ID,
+};
 
-const db = new Firestore({
-  projectId,
+const admin = require("firebase-admin");
+
+admin.initializeApp({
+  config,
 });
+
+const db = admin.firestore();
 
 const devicesRef = db.collection("devices");
 const usersRef = db.collection("users");
 
 exports.getUser = async (googleID) => {
-  console.log("[iOLED-API][Firestore][getUser][Request]".red, googleID);
+  console.log("[iOLED-API][Firestore][getUser][Request]", googleID);
   try {
     const snapshot = await usersRef.where("googleID", "==", googleID).get();
 
     if (snapshot.empty) {
-      console.log("[iOLED-API][Firestore][getUser] No matching documents".red);
+      console.log("[iOLED-API][Firestore][getUser] No matching documents");
       return null;
     } else {
       let userId, user;
@@ -26,7 +32,7 @@ exports.getUser = async (googleID) => {
       return { userId, user };
     }
   } catch (err) {
-    console.log("[iOLED-API][Firestore][getUser][Error]".red, err);
+    console.log("[iOLED-API][Firestore][getUser][Error]", err);
     return null;
   }
 };
@@ -37,7 +43,7 @@ exports.getDevices = async (userID) => {
     const devices = snapshot.docs.map((doc) => doc.data());
     return devices;
   } catch (err) {
-    console.log("[iOLED-API][Firestore][getDevices]".red, err);
+    console.log("[iOLED-API][Firestore][getDevices]", err);
     return null;
   }
 };
