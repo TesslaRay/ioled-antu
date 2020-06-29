@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 const {
@@ -9,11 +9,11 @@ const {
   // getUserByDevice,
   // getAllDevices,
   // updateDeviceConfig,
-} = require('../controllers/user');
+} = require("./user_controlles");
 
 // Router middleware to handle auth routes.
-router.route('/user/currentUser').post(currentUser);
-router.route('/user/devices').post(getDevices);
+router.route("/user/currentUser").post(currentUser);
+router.route("/user/devices").post(getDevices);
 // router.route('/saveDevice').post(saveDevice);
 // router.route('/linkUser/:userId/:deviceId').put(linkUserToDevice);
 // router.route('/device/:id/user').get(getUserByDevice);

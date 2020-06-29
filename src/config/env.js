@@ -4,8 +4,7 @@ if (JWT_KEY === undefined) {
   process.exit(1);
 }
 
-const googleClientID =
-  "46245556778-ngtrr6id71duv3k898qi22l55ap9hhe3.apps.googleusercontent.com";
+const googleClientID = process.env.GOOGLE_CLIENT_ID;
 if (googleClientID === undefined) {
   console.log(
     "[iOLED-API][Error] No google Client ID specified in the env variables"

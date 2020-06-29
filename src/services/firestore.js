@@ -74,19 +74,18 @@ exports.addDevice = async (device) => {
 exports.saveUser = async (user) => {
   try {
     if (user.lastName === undefined) {
-      console.log("[iOLED-API][Firestore][Save User] Invalid lastName".red);
+      console.log("[iOLED-API][Firestore][Save User] Invalid lastName");
       user.lastName = ".";
     }
 
     const ref = await usersRef.add(user);
     console.log(
-      `[iOLED-API][Firestore][Save User] New User Added: ${user.googleID}`.red
+      `[iOLED-API][Firestore][Save User] New User Added: ${user.googleID}`
     );
     return user.googleID;
   } catch (err) {
     console.log(
       `[iOLED-API][Firestore][Save User][Error] There was an error saving the new user ${err}`
-        .red
     );
     throw new Error(err);
   }

@@ -5,10 +5,7 @@ DEV := env-dev.json
 ENV := $(DEV)
 
 JWT_KEY := $$(cat $(ENV) | grep JWT_KEY | sed 's/"/ /g' | awk {'print $$3'})
-HISTORY_URL := $$(cat $(ENV) | grep HISTORY_URL | sed 's/"/ /g' | awk {'print $$3'})
-DEVICE_CONTROL_URL := $$(cat $(ENV) | grep DEVICE_CONTROL_URL | sed 's/"/ /g' | awk {'print $$3'})
-MAILER_URL := $$(cat $(ENV) | grep MAILER_URL | sed 's/"/ /g' | awk {'print $$3'})
-USER_URL := $$(cat $(ENV) | grep USER_URL | sed 's/"/ /g' | awk {'print $$3'})
+GOOGLE_CLIENT_ID := $$(cat $(ENV) | grep GOOGLE_CLIENT_ID | sed 's/"/ /g' | awk {'print $$3'})
 GOOGLE_CLIENT_SECRET := $$(cat $(ENV) | grep GOOGLE_CLIENT_SECRET | sed 's/"/ /g' | awk {'print $$3'})
 PROJECT_ID := $$(cat $(ENV) | grep PROJECT_ID | sed 's/"/ /g' | awk {'print $$3'})
 

@@ -8,16 +8,16 @@
 const config = {
   /** */
   api: {
-    version: 'v1',
-    discovery: 'https://cloudiot.googleapis.com/$discovery/rest',
+    version: "v1",
+    discovery: "https://cloudiot.googleapis.com/$discovery/rest",
   },
   iotCore: {
-    cloudRegion: 'us-central1',
-    PROJECT_ID: 'ioled-dev-262215',
-    registryId: 'ioled-devices',
+    cloudRegion: "us-central1",
+    PROJECT_ID: "ioled-antu",
+    registryId: "ioled-devices",
     version: 0,
-    parentName: '',
-    registryName: '',
+    parentName: "",
+    registryName: "",
   },
 };
 

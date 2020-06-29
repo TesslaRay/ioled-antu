@@ -1,9 +1,9 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const {googleClientID} = require('../config/env');
-const {googleClientSecret} = require('../config/env');
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const { googleClientID } = require("../config/env");
+const { googleClientSecret } = require("../config/env");
 
-const {getUser, saveUser} = require('./firestore');
+const { getUser, saveUser } = require("./firestore");
 
 /**
  * Determines which data of the user object is stored in the session.
@@ -34,16 +34,16 @@ passport.use(
     {
       clientID: googleClientID,
       clientSecret: googleClientSecret,
-      callbackURL: '/auth/google/callback',
+      callbackURL: "/auth/google/callback",
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
       // Destructure profile values.
       const {
         id: googleID,
-        name: {familyName: lastName, givenName: name},
-        emails: [{value: email}],
-        photos: [{value: photo}],
+        name: { familyName: lastName, givenName: name },
+        emails: [{ value: email }],
+        photos: [{ value: photo }],
       } = profile;
 
       // Search in the DB for the user.

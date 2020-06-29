@@ -1,5 +1,5 @@
-const passport = require('passport');
-const colors = require('colors');
+const passport = require("passport");
+const colors = require("colors");
 
 /**
  * Send the user to google oauth flow to log in with a google account.
@@ -9,17 +9,17 @@ const colors = require('colors');
  * @param  {Function} next Callback function
  */
 exports.authRequest = (req, res, next) => {
-  console.log('[iOLED-API][auth][authRequest][Request]'.blue);
-  passport.authenticate('google', {
+  console.log("[iOLED-API][auth][authRequest][Request]");
+  passport.authenticate("google", {
     session: false,
-    scope: ['profile', 'email'],
+    scope: ["profile", "email"],
   })(req, res, next);
-  console.log('[iOLED-API][auth][authRequest][Response]'.blue, []);
+  console.log("[iOLED-API][auth][authRequest][Response]", []);
 };
 
 // Redirect to the server with the session established.
 exports.authCallback = (req, res, next) => {
-  console.log('[iOLED-API][auth][authCallback][Request]'.blue);
-  passport.authenticate('google', {session: false})(req, res, next);
-  console.log('[iOLED-API][auth][authCallback][Response]'.blue, []);
+  console.log("[iOLED-API][auth][authCallback][Request]");
+  passport.authenticate("google", { session: false })(req, res, next);
+  console.log("[iOLED-API][auth][authCallback][Response]", []);
 };

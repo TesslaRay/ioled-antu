@@ -1,53 +1,53 @@
-name: Deploy production
+# name: Deploy production
 
-on:
-  push:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
 
-jobs:
-  deploy-testing:
-    runs-on: ubuntu-latest
-    name: Deploy PROD
-    steps:
-      - name: Retrieving the repo
-        uses: actions/checkout@v1
-      - name: Edit HISTORY_URL
-        uses: mikefarah/yq@3.2.1
-        with:
-          cmd: yq w -i app.yaml env_variables.HISTORY_URL ${{secrets.HISTORY_URL}}
-      - name: Edit DEVICE_CONTROL_URL
-        uses: mikefarah/yq@3.2.1
-        with:
-          cmd: yq w -i app.yaml env_variables.DEVICE_CONTROL_URL ${{secrets.DEVICE_CONTROL_URL}}
-      - name: Edit USER_URL
-        uses: mikefarah/yq@3.2.1
-        with:
-          cmd: yq w -i app.yaml env_variables.USER_URL ${{secrets.USER_URL}}
-      - name: Edit JWT_KEY
-        uses: mikefarah/yq@3.2.1
-        with:
-          cmd: yq w -i app.yaml env_variables.JWT_KEY ${{secrets.JWT_KEY}}
-      - name: Edit GOOGLE_CLIENT_SECRET
-        uses: mikefarah/yq@3.2.1
-        with:
-          cmd: yq w -i app.yaml env_variables.GOOGLE_CLIENT_SECRET ${{secrets.GOOGLE_CLIENT_SECRET}}
-      - name: Edit GOOGLE_CLIENT_ID
-        uses: mikefarah/yq@3.2.1
-        with:
-          cmd: yq w -i app.yaml env_variables.GOOGLE_CLIENT_ID ${{secrets.GOOGLE_CLIENT_ID}}
-      - name: Edit PROJECT_ID
-        uses: mikefarah/yq@3.2.1
-        with:
-          cmd: yq w -i app.yaml env_variables.PROJECT_ID ${{secrets.GCLOUD_PROJECT_ID}}
-      - name: Prepare app.yaml
-        uses: mikefarah/yq@3.2.1
-        with:
-          cmd: yq w -i app.yaml service api-gateway
-      - name: Run deployment
-        uses: actions-hub/gcloud@master
-        env:
-          APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
-          PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
-        with:
-          args: app deploy app.yaml
+# jobs:
+#   deploy-testing:
+#     runs-on: ubuntu-latest
+#     name: Deploy PROD
+#     steps:
+#       - name: Retrieving the repo
+#         uses: actions/checkout@v1
+#       - name: Edit HISTORY_URL
+#         uses: mikefarah/yq@3.2.1
+#         with:
+#           cmd: yq w -i app.yaml env_variables.HISTORY_URL ${{secrets.HISTORY_URL}}
+#       - name: Edit DEVICE_CONTROL_URL
+#         uses: mikefarah/yq@3.2.1
+#         with:
+#           cmd: yq w -i app.yaml env_variables.DEVICE_CONTROL_URL ${{secrets.DEVICE_CONTROL_URL}}
+#       - name: Edit USER_URL
+#         uses: mikefarah/yq@3.2.1
+#         with:
+#           cmd: yq w -i app.yaml env_variables.USER_URL ${{secrets.USER_URL}}
+#       - name: Edit JWT_KEY
+#         uses: mikefarah/yq@3.2.1
+#         with:
+#           cmd: yq w -i app.yaml env_variables.JWT_KEY ${{secrets.JWT_KEY}}
+#       - name: Edit GOOGLE_CLIENT_SECRET
+#         uses: mikefarah/yq@3.2.1
+#         with:
+#           cmd: yq w -i app.yaml env_variables.GOOGLE_CLIENT_SECRET ${{secrets.GOOGLE_CLIENT_SECRET}}
+#       - name: Edit GOOGLE_CLIENT_ID
+#         uses: mikefarah/yq@3.2.1
+#         with:
+#           cmd: yq w -i app.yaml env_variables.GOOGLE_CLIENT_ID ${{secrets.GOOGLE_CLIENT_ID}}
+#       - name: Edit PROJECT_ID
+#         uses: mikefarah/yq@3.2.1
+#         with:
+#           cmd: yq w -i app.yaml env_variables.PROJECT_ID ${{secrets.GCLOUD_PROJECT_ID}}
+#       - name: Prepare app.yaml
+#         uses: mikefarah/yq@3.2.1
+#         with:
+#           cmd: yq w -i app.yaml service api-gateway
+#       - name: Run deployment
+#         uses: actions-hub/gcloud@master
+#         env:
+#           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+#           PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
+#         with:
+#           args: app deploy app.yaml

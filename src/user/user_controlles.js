@@ -1,4 +1,4 @@
-const { getUser, getDevices } = require("../../services/firestore");
+const { getUser, getDevices } = require("../services/firestore");
 
 /**
  * @CristianValdivia
