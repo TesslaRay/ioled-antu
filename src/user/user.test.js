@@ -17,4 +17,15 @@ describe("Test for user routes", () => {
     });
     expect(res.status).toBe(200);
   });
+
+  it("Test saveDevice", async () => {
+    const res = await request
+      .post("/user/saveDevice")
+      .send({
+        user: "117282606687729420127",
+        deviceID: "esp8266_test",
+        power: 10000,
+      });
+    expect(res.status).toBe(200);
+  });
 });

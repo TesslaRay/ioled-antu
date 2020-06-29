@@ -57,17 +57,28 @@ exports.addDevice = async (device) => {
   try {
     const ref = await devicesRef.add(device);
 
-    console.log(
-      "[iOLED-API][Firestore][Save Device] New Device Added:",
-      ref.id
-    );
+    console.log("[iOLED-API][Firestore][addDevice] New device added:", device);
     return ref;
   } catch (err) {
     console.log(
-      "[iOLED-API][Firestore][Save Device][Error] There was an error saving the new device",
+      "[iOLED-API][Firestore][addDevice][Error] There was an error saving the new device",
       err
     );
     throw new Error(err);
+  }
+};
+
+exports.deleteDevice = async (device) => {
+  try {
+    const snapshot = await devicesRef.where("deviceID", "==", device).get();
+    snapshot.forEach((doc) => {
+      doc.ref.delete();
+    });
+    console.log("[iOLED-API][Firestore][deleteDevice] Delete device: ", device);
+    return;
+  } catch (err) {
+    console.log("[iOLED-API][Firestore][deleteDevice][error] ", err);
+    return res.status(500);
   }
 };
 

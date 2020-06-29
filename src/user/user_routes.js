@@ -4,7 +4,8 @@ var router = express.Router();
 const {
   currentUser,
   getDevices,
-  // saveDevice,
+  saveDevice,
+  deleteDevice,
   // linkUserToDevice,
   // getUserByDevice,
   // getAllDevices,
@@ -14,7 +15,8 @@ const {
 // Router middleware to handle auth routes.
 router.route("/user/currentUser").post(currentUser);
 router.route("/user/devices").post(getDevices);
-// router.route('/saveDevice').post(saveDevice);
+router.route("/user/saveDevice").post(saveDevice);
+router.route("/user/deleteDevice").post(deleteDevice);
 // router.route('/linkUser/:userId/:deviceId').put(linkUserToDevice);
 // router.route('/device/:id/user').get(getUserByDevice);
 // router.route('/allDevices').get(getAllDevices);
