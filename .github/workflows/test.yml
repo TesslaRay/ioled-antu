@@ -7,4 +7,6 @@ jobs:
       - name: Retrieving the repo
         uses: actions/checkout@v2
       - name: Run Jest
-        uses: stefanoeb/jest-action@1.0.3
+        uses: mattallty/jest-github-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
