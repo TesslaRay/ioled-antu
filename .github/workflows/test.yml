@@ -9,7 +9,7 @@ jobs:
       - name: Install modules
         run: yarn
       - name: Run tests
-        run: yarn ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}} ${{secrets.GOOGLE_CLIENT_SECRET}} ${{secrets.GOOGLE_CLIENT_ID}} ${{secrets.JWT_KEY}} ${{secrets.GCLOUD_PROJECT_ID}} test
+        run: PORT=5000 GOOGLE_APPLICATION_CREDENTIALS=${{secrets.GOOGLE_APPLICATION_CREDENTIALS}} JWT_KEY=${{secrets.JWT_KEY}} PROJECT_ID=${{secrets.GCLOUD_PROJECT_ID}} GOOGLE_CLIENT_SECRET=${{secrets.GOOGLE_CLIENT_SECRET}} GOOGLE_CLIENT_ID=${{secrets.GOOGLE_CLIENT_ID}} yarn test
         # env:
         #   JWT_KEY: ${{secrets.JWT_KEY}}
         #   GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
