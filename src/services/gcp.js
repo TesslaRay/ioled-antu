@@ -103,45 +103,9 @@ exports.getDeviceState = async (deviceId) => {
   }
 };
 
-exports.getDeviceConfig = async (deviceId) => {
-  const devicePath = client.devicePath(
-    googleConf.iotCore.PROJECT_ID,
-    googleConf.iotCore.cloudRegion,
-    googleConf.iotCore.registryId,
-    deviceId
-  );
-
-  try {
-    const responses = await client.listDeviceConfigVersions({
-      name: devicePath,
-    });
-    const configs = responses[0].deviceConfigs;
-
-    if (configs.length > 0) {
-      return configs.map((config) => {
-        const bufferedData = config.binaryData.toString("utf8");
-        if (bufferedData === "") return { err: "no config" };
-        else {
-          let string = config.binaryData.toString("utf8");
-          if (string[0] != "{") {
-            string = `{${string}}`;
-          }
-          const data = JSON.parse(string);
-          // Show the date and time corresponding to the timezone
-          const datetime = new Date(config.cloudUpdateTime.seconds * 1000);
-
-          data.datetime = datetime;
-          return data;
-        }
-      });
-    }
-  } catch (err) {
-    throw err;
-  }
-};
-
 /**
- * Send the configuration to a iot core device.
+ * @CristianValdivia
+ * Send the configuration to a IoT Core device.
  * @param {String} deviceId The id or name of the devices registered.
  * @param {string} config The configuration blob send to the device.
  * @example Configuration example

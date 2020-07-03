@@ -37,6 +37,26 @@ exports.getUser = async (googleID) => {
   }
 };
 
+exports.saveUser = async (user) => {
+  try {
+    if (user.lastName === undefined) {
+      console.log("[iOLED-API][Firestore][Save User] Invalid lastName");
+      user.lastName = ".";
+    }
+
+    const ref = await usersRef.add(user);
+    console.log(
+      `[iOLED-API][Firestore][Save User] New User Added: ${user.googleID}`
+    );
+    return user.googleID;
+  } catch (err) {
+    console.log(
+      `[iOLED-API][Firestore][Save User][Error] There was an error saving the new user ${err}`
+    );
+    throw new Error(err);
+  }
+};
+
 exports.getDevices = async (userID) => {
   try {
     const snapshot = await devicesRef.where("user", "==", userID).get();
@@ -46,11 +66,6 @@ exports.getDevices = async (userID) => {
     console.log("[iOLED-API][Firestore][getDevices]", err);
     return null;
   }
-};
-
-exports.isAdmin = (user) => {
-  if (user.role === "admin") return true;
-  else return false;
 };
 
 exports.addDevice = async (device) => {
@@ -82,95 +97,6 @@ exports.deleteDevice = async (device) => {
   }
 };
 
-exports.saveUser = async (user) => {
-  try {
-    if (user.lastName === undefined) {
-      console.log("[iOLED-API][Firestore][Save User] Invalid lastName");
-      user.lastName = ".";
-    }
-
-    const ref = await usersRef.add(user);
-    console.log(
-      `[iOLED-API][Firestore][Save User] New User Added: ${user.googleID}`
-    );
-    return user.googleID;
-  } catch (err) {
-    console.log(
-      `[iOLED-API][Firestore][Save User][Error] There was an error saving the new user ${err}`
-    );
-    throw new Error(err);
-  }
-};
-
-exports.getAllDevicesWithUserInfo = async () => {
-  try {
-    const snapshot = await devicesRef.get();
-    const data = snapshot.docs.map((doc) => {
-      const data = doc.data();
-      return { deviceID: data.deviceID, user: data.user };
-    });
-    for (let index = 0; index < data.length; index++) {
-      const device = data[index];
-      const userId = device.user;
-
-      if (userId !== "") {
-        const doc = await usersRef.where("googleID", "==", userId).get();
-        if (doc.empty) {
-          console.log(
-            "[User-API][Firestore][getAllDevicesWithUserInfo] No user found"
-          );
-          return null;
-        }
-        let userInfo;
-        doc.forEach((doc) => {
-          userInfo = doc.data();
-        });
-        device.user = {
-          name: capitalize(`${userInfo.name} ${userInfo.lastName}`),
-          email: userInfo.email,
-          photo: userInfo.photo,
-        };
-      } else {
-        device.user = null;
-      }
-    }
-    return data;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-exports.getUserByDevice = async (id) => {
-  try {
-    const snapshot = await devicesRef.where("deviceID", "==", id).get();
-    if (snapshot.empty) {
-      console.log("[User-API][Firestore][getUserByDevice] Device not found");
-      return null;
-    }
-    let device;
-    snapshot.forEach((doc) => {
-      device = doc.data();
-    });
-    const userId = device.user;
-    const doc = await usersRef.where("googleID", "==", userId).get();
-    if (doc.empty) {
-      console.log("[User-API][Firestore][getUserByDevice] No user found");
-      return null;
-    }
-    let user;
-    doc.forEach((doc) => {
-      user = doc.data();
-    });
-    return {
-      name: capitalize(`${user.name} ${user.lastName}`),
-      email: user.email,
-      photo: user.photo,
-    };
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
 /**
  * @CristianValdivia
  * Update the config of device
@@ -179,7 +105,7 @@ exports.getUserByDevice = async (id) => {
  * @param  {object} res Response
  * @param  {Function} next Callback function
  */
-exports.updateDevice = async (id, config) => {
+exports.updateDeviceDB = async (id, config) => {
   try {
     await devicesRef
       .where("deviceID", "==", id)
@@ -189,10 +115,10 @@ exports.updateDevice = async (id, config) => {
           devicesRef.doc(doc.id).update(config);
         });
       });
-    console.log("[User-API][Firestore][updateDevice] Update config:", config);
+    console.log("[Firestore Service] [updateDeviceDB] Update config:", config);
   } catch (error) {
     console.log(
-      "[User-API][Firestore][updateDevice] [Error] There was an error update config",
+      "[Firestore Service] [updateDeviceDB] [Error] There was an error update config",
       error
     );
     throw new Error(error);
