@@ -1,0 +1,10 @@
+name: CI
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieving the repo
+        uses: actions/checkout@v2
+      - name: Run Jest
+        uses: stefanoeb/jest-action@1.0.3
