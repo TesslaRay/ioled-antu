@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Retrieving the repo
         uses: actions/checkout@v2
-      - name: Run Jest
-        uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install modules
+        run: yarn
+      - name: Run tests
+        run: yarn test
