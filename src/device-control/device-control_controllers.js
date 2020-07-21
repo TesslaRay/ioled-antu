@@ -47,7 +47,7 @@ exports.getDeviceLastState = async (req, res) => {
     const deviceState = await googleService.getDeviceState(id);
     const deviceStateResponse = Object.keys(deviceState).length === 0 ? {} : deviceState[0];
     console.log(`[Device Control API][getDeviceLastState (${id})][Response]`, deviceStateResponse);
-    res.status(200).json({data: deviceStateResponse});
+    res.status(200).json({deviceState: deviceStateResponse});
   } catch (err) {
     console.log(`[Device Control API][getDeviceLastState (${id})][Error]`, err);
     // Send the error
