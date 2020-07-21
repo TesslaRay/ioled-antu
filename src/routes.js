@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
 // ----- Import all routes here -----
-const authRoute = require("./auth/routes/auth");
-const userRoute = require("./user/user_routes");
-const devicesRoute = require("./device-control/device-control_routes");
+const authRoute = require('./auth/auth_routes');
+const userRoute = require('./user/user_routes');
+const devicesRoute = require('./device-control/device-control_routes');
 
 // ----- Use all routes here -----
 app.use(authRoute);

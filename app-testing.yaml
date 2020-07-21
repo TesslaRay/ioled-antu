@@ -1,0 +1,8 @@
+runtime: nodejs10
+service: testing-ioled-api
+
+env_variables:
+  JWT_KEY: 'ioled'
+  GOOGLE_CLIENT_SECRET: 'rorOt-T3CZJ0yfdV-ceEjqXW'
+  GOOGLE_CLIENT_ID: '452371821974-ukpqae9th135selnbbamg4v54q3fue56.apps.googleusercontent.com'
+  PROJECT_ID: 'ioled-antu'

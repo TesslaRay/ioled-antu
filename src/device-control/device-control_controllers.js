@@ -8,21 +8,6 @@ const {updateDeviceDB} = require('../services/firestore');
  * @description List the last 10 states of device
  * @param {String} deviceId ID of the device listed in IoT Core
  * @returns {object} HTTP status code - 200, 500.
- * @example Response example:
- * {
- *  "deviceState": {
- *   "deviceStates": [
- *     {
- *       "data": {
- *         "hum": 39.917511,
- *         "temp": 30.660281
- *       },
- *       "datetime": "2020-01-30T14:35:39.750Z"
- *     },
- *     ...
- *   ]
- *  }
- * }
  */
 exports.getDeviceState = async (req, res) => {
   const {id} = req.params;

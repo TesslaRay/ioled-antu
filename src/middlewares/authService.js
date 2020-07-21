@@ -19,9 +19,9 @@ exports.signToken = (req, res) => {
     token = jwt.sign({user: req.user}, JWT_KEY);
   }
 
-  const URL = 'http://localhost:5000/';
+  const URL = 'http://localhost:3000/';
   // const URL = 'https://front-ioled-dot-ioled-dev-262215.appspot.com/';
-  // const URL = 'https://dev-front-ioled-dot-ioled-dev-262215.appspot.com/';
+  // const URL = 'https://dev-front-ioled-dot-ioled-antu.rj.r.appspot.com/';
   const redirectURL = `${URL}?token=${token}`;
   console.log('[iOLED-API][signToken][Response]', {token});
   res.redirect(redirectURL);
