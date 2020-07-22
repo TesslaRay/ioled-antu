@@ -1,7 +1,7 @@
 {
   "name": "ioled-antu",
   "version": "1.0.0",
-  "description": "ioled API",
+  "description": "iOLED ANTÜ API",
   "main": "index.js",
   "scripts": {
     "test": "jest",

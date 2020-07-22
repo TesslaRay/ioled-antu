@@ -153,7 +153,9 @@ exports.changeDevice = async (req, res) => {
 
   try {
     await updateDeviceDB(id, config);
-    console.log('[iOLED-API][POST][user][changeDevice][Response]', {changeDevice: config});
+    console.log('[iOLED-API][POST][user][changeDevice][Response]', {
+      changeDevice: config,
+    });
     res.status(200).send({changeDevice: config});
   } catch (err) {
     console.log('[iOLED-API][POST][user][ChangeDevice][Error]', err);

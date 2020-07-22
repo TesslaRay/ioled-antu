@@ -30,14 +30,6 @@ exports.getDeviceState = async (req, res) => {
  * @description Controller that returns a JSON object with the last state saved in IoT Core
  * @param {String} id - ID of the device listed in IoT Core
  * @returns {object} HTTP status code - 200, 500.
- * @example Response example:
- * {
- *  "data": {
- *    "hum": 43.541473,
- *    "temp": 30.703181
- *  },
- *  "datetime": "2020-01-30T14:42:23.790Z"
- * }
  */
 exports.getDeviceLastState = async (req, res) => {
   const {id} = req.params;

@@ -15,6 +15,5 @@ router.route('/user/devices').get(getDevices);
 router.route('/user/saveDevice').post(saveDevice);
 router.route('/user/deleteDevice').post(deleteDevice);
 router.route('/user/changeDevice').post(changeDevice);
-
 // Export router
 module.exports = router;
