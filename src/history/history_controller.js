@@ -1,4 +1,4 @@
-const {dayQuery, weekQuery, monthQuery} = require('../services/big-query');
+const {dayQuery, weekQuery, monthQuery} = require('../services/bigquery');
 /**
  * Returns the graph info for one day
  * @description Returns the information that was generated in the Big Query service and got parsed with the Chartjs Schema
@@ -13,16 +13,19 @@ const {dayQuery, weekQuery, monthQuery} = require('../services/big-query');
  * }
  */
 exports.getDayGraph = async (req, res) => {
-  console.log('[getDayGraph][Request] ', req.params);
+  console.log('[iOLED-API][GET][history][getDayGraph][Request] ', req.params);
   const {device} = req.params;
   try {
     const response = await dayQuery(device);
-    console.log('[getDayGraph][Response]', response);
+    console.log('[iOLED-API][GET][history][getDayGraph][Response]', response);
     res.status(200).json({
       data: response,
     });
   } catch (error) {
-    console.log('[getDayGraph][Error]: There was a problem getting the response', error);
+    console.log(
+      '[iOLED-API][GET][history][getDayGraph][Error]: There was a problem getting the response',
+      error
+    );
   }
 };
 
@@ -40,16 +43,19 @@ exports.getDayGraph = async (req, res) => {
  * }
  */
 exports.getWeekGraph = async (req, res) => {
-  console.log('[getWeekGraph][Request] ', req.params);
+  console.log('[iOLED-API][GET][history][getWeekGraph][Request] ', req.params);
   const {device} = req.params;
   try {
     const response = await weekQuery(device);
-    console.log('[getWeekGraph][Response]', response);
+    console.log('[iOLED-API][GET][history][getWeekGraph][Response]', response);
     res.status(200).json({
       data: response,
     });
   } catch (error) {
-    console.log('[getWeekGraph][Error]: There was a problem getting the response', error);
+    console.log(
+      '[iOLED-API][GET][history][getWeekGraph][Error]: There was a problem getting the response',
+      error
+    );
     res.status(500).json({error});
   }
 };
@@ -68,16 +74,19 @@ exports.getWeekGraph = async (req, res) => {
  * }
  */
 exports.getMonthGraph = async (req, res) => {
-  console.log('[getMonthGraph][Request] ', req.params);
+  console.log('[iOLED-API][GET][history][getMonthGraph][Request] ', req.params);
   const {device} = req.params;
   try {
     const response = await monthQuery(device);
-    console.log('[getMonthGraph][Response]', response);
+    console.log('[iOLED-API][GET][history][getMonthGraph][Response]', response);
     res.status(200).json({
       data: response,
     });
   } catch (error) {
-    console.log('[getMonthGraph][Error]: There was a problem getting the response', error);
+    console.log(
+      '[iOLED-API][GET][history][getMonthGraph][Error]: There was a problem getting the response',
+      error
+    );
     res.status(500).json({error});
   }
 };
