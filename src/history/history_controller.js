@@ -14,7 +14,8 @@ const {dayQuery, weekQuery, monthQuery} = require('../services/bigquery');
  */
 exports.getDayGraph = async (req, res) => {
   console.log('[iOLED-API][GET][history][getDayGraph][Request] ', req.params);
-  const {device} = req.params;
+  const device = req.params.id;
+
   try {
     const response = await dayQuery(device);
     console.log('[iOLED-API][GET][history][getDayGraph][Response]', response);
@@ -44,7 +45,7 @@ exports.getDayGraph = async (req, res) => {
  */
 exports.getWeekGraph = async (req, res) => {
   console.log('[iOLED-API][GET][history][getWeekGraph][Request] ', req.params);
-  const {device} = req.params;
+  const device = req.params.id;
   try {
     const response = await weekQuery(device);
     console.log('[iOLED-API][GET][history][getWeekGraph][Response]', response);
@@ -75,7 +76,7 @@ exports.getWeekGraph = async (req, res) => {
  */
 exports.getMonthGraph = async (req, res) => {
   console.log('[iOLED-API][GET][history][getMonthGraph][Request] ', req.params);
-  const {device} = req.params;
+  const device = req.params.id;
   try {
     const response = await monthQuery(device);
     console.log('[iOLED-API][GET][history][getMonthGraph][Response]', response);

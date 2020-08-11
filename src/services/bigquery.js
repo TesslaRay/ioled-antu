@@ -20,12 +20,11 @@ exports.dayQuery = async (device) => {
     GROUP BY time, date
     ORDER BY date, time asc;
   `;
-
   try {
     const [job] = await bigquery.createQueryJob({query});
-
     try {
       const [rows] = await job.getQueryResults();
+      console.log(rows);
       const response = chartJsSchema(rows);
       return response;
     } catch (errorRows) {
@@ -98,7 +97,6 @@ exports.monthQuery = async (device) => {
     GROUP BY date
     ORDER BY date asc;
   `;
-
   try {
     const [job] = await bigquery.createQueryJob({query});
 

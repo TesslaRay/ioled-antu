@@ -1,4 +1,4 @@
-const googleService = require('../services/gcp');
+const googleService = require('../services/iot_core');
 
 const {updateDeviceDB} = require('../services/firestore');
 
