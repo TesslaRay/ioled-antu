@@ -1,4 +1,4 @@
-const googleService = require('../services/gcp');
+const googleService = require('../services/iot_core');
 
 const {updateDeviceDB} = require('../services/firestore');
 
@@ -8,21 +8,6 @@ const {updateDeviceDB} = require('../services/firestore');
  * @description List the last 10 states of device
  * @param {String} deviceId ID of the device listed in IoT Core
  * @returns {object} HTTP status code - 200, 500.
- * @example Response example:
- * {
- *  "deviceState": {
- *   "deviceStates": [
- *     {
- *       "data": {
- *         "hum": 39.917511,
- *         "temp": 30.660281
- *       },
- *       "datetime": "2020-01-30T14:35:39.750Z"
- *     },
- *     ...
- *   ]
- *  }
- * }
  */
 exports.getDeviceState = async (req, res) => {
   const {id} = req.params;
@@ -45,14 +30,6 @@ exports.getDeviceState = async (req, res) => {
  * @description Controller that returns a JSON object with the last state saved in IoT Core
  * @param {String} id - ID of the device listed in IoT Core
  * @returns {object} HTTP status code - 200, 500.
- * @example Response example:
- * {
- *  "data": {
- *    "hum": 43.541473,
- *    "temp": 30.703181
- *  },
- *  "datetime": "2020-01-30T14:42:23.790Z"
- * }
  */
 exports.getDeviceLastState = async (req, res) => {
   const {id} = req.params;
@@ -62,7 +39,7 @@ exports.getDeviceLastState = async (req, res) => {
     const deviceState = await googleService.getDeviceState(id);
     const deviceStateResponse = Object.keys(deviceState).length === 0 ? {} : deviceState[0];
     console.log(`[Device Control API][getDeviceLastState (${id})][Response]`, deviceStateResponse);
-    res.status(200).json({data: deviceStateResponse});
+    res.status(200).json({deviceState: deviceStateResponse});
   } catch (err) {
     console.log(`[Device Control API][getDeviceLastState (${id})][Error]`, err);
     // Send the error
@@ -97,6 +74,8 @@ exports.updateDeviceConfig = async (req, res) => {
   // Get the deviceId and config from the request body.
   const {id} = req.params;
   console.log(`[Device Control API][updateDeviceConfig (${id})][Request] `, req.params);
+  console.log(req.body);
+
   const {device} = req.body;
   const {config} = device;
 

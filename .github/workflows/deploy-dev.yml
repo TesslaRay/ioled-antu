@@ -1,41 +1,41 @@
-# name: Deploy development
+name: Deploy development
 
-# on:
-#   push:
-#     branches:
-#       - develop
+on:
+  push:
+    branches:
+      - develop
 
-# jobs:
-#   deploy-testing:
-#     runs-on: ubuntu-latest
-#     name: Deploy Dev
-#     steps:
-#       - name: Retrieving the repo
-#         uses: actions/checkout@v1
-#       - name: Edit JWT_KEY
-#         uses: mikefarah/yq@3.2.1
-#         with:
-#           cmd: yq w -i app.yaml env_variables.JWT_KEY ${{secrets.JWT_KEY}}
-#       - name: Edit GOOGLE_CLIENT_SECRET
-#         uses: mikefarah/yq@3.2.1
-#         with:
-#           cmd: yq w -i app.yaml env_variables.GOOGLE_CLIENT_SECRET ${{secrets.GOOGLE_CLIENT_SECRET}}
-#       - name: Edit GOOGLE_CLIENT_ID
-#         uses: mikefarah/yq@3.2.1
-#         with:
-#           cmd: yq w -i app.yaml env_variables.GOOGLE_CLIENT_ID ${{secrets.GOOGLE_CLIENT_ID}}
-#       - name: Edit PROJECT_ID
-#         uses: mikefarah/yq@3.2.1
-#         with:
-#           cmd: yq w -i app.yaml env_variables.PROJECT_ID ${{secrets.GCLOUD_PROJECT_ID}}
-#       - name: Prepare app.yaml
-#         uses: mikefarah/yq@3.2.1
-#         with:
-#           cmd: yq w -i app.yaml service dev-ioled-api
-#       - name: Run deployment
-#         uses: actions-hub/gcloud@master
-#         env:
-#           APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
-#           PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
-#         with:
-#           args: app deploy app.yaml
+jobs:
+  deploy-testing:
+    runs-on: ubuntu-latest
+    name: Deploy Dev
+    steps:
+      - name: Retrieving the repo
+        uses: actions/checkout@v1
+      - name: Edit JWT_KEY
+        uses: mikefarah/yq@3.2.1
+        with:
+          cmd: yq w -i app.yaml env_variables.JWT_KEY ${{secrets.JWT_KEY}}
+      - name: Edit GOOGLE_CLIENT_SECRET
+        uses: mikefarah/yq@3.2.1
+        with:
+          cmd: yq w -i app.yaml env_variables.GOOGLE_CLIENT_SECRET ${{secrets.GOOGLE_CLIENT_SECRET}}
+      - name: Edit GOOGLE_CLIENT_ID
+        uses: mikefarah/yq@3.2.1
+        with:
+          cmd: yq w -i app.yaml env_variables.GOOGLE_CLIENT_ID ${{secrets.GOOGLE_CLIENT_ID}}
+      - name: Edit PROJECT_ID
+        uses: mikefarah/yq@3.2.1
+        with:
+          cmd: yq w -i app.yaml env_variables.PROJECT_ID ${{secrets.GCLOUD_PROJECT_ID}}
+      - name: Prepare app.yaml
+        uses: mikefarah/yq@3.2.1
+        with:
+          cmd: yq w -i app.yaml service dev-ioled-api
+      - name: Run deployment
+        uses: actions-hub/gcloud@master
+        env:
+          APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+          PROJECT_ID: ${{secrets.GCLOUD_PROJECT_ID}}
+        with:
+          args: app deploy app.yaml
