@@ -74,6 +74,8 @@ exports.updateDeviceConfig = async (req, res) => {
   // Get the deviceId and config from the request body.
   const {id} = req.params;
   console.log(`[Device Control API][updateDeviceConfig (${id})][Request] `, req.params);
+  console.log(req.body);
+
   const {device} = req.body;
   const {config} = device;
 

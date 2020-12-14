@@ -105,7 +105,7 @@ exports.getDeviceState = async (deviceId) => {
  *  "device": {
  *      "deviceId": "esp8266_16CB39",
  *      "config": {
- *        "board": {
+ *        "esp": {
  *          "led1": {
  *            "duty": 1,
  *            "state": true
@@ -128,25 +128,21 @@ exports.getDeviceState = async (deviceId) => {
 exports.updateDeviceConfig = async (deviceId, config) => {
   const _config = _.pick(config, ['duty', 'state']);
 
-  const _configTimer = _.pick(config, ['timerOn', 'timerOff', 'timerState', 'timerDuty']);
+  const _configTimer = _.pick(config, ['timerOn', 'timerOff', 'timerState']);
 
-  const _configRamp = _.pick(config, ['onTime', 'offTime', 'rampState']);
+  // TODO: Add ramp
+  // const _configRamp = _.pick(config, ['onTime', 'offTime', 'rampState']);
 
-  // Generate the board format for the device.
-  const board = {
-    board: {
+  // Generate the esp format for the device.
+  const esp = {
+    esp: {
       led1: _config,
       led2: _config,
-      gpio1: {state: config.gpio1},
-      gpio2: {state: config.gpio2},
-      gpio3: {state: config.gpio3},
-      gpio4: {state: config.gpio4},
       timer: _configTimer,
-      ramp: _configRamp,
     },
   };
   // Convert config object to JSON.
-  const data = JSON.stringify(board);
+  const data = JSON.stringify(esp);
 
   // Convert data to base64
   const binaryData = Buffer.from(data).toString('base64');

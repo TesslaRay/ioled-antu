@@ -27,6 +27,10 @@ deploy-dev dev:
 	@echo "[DEV][App Engine Deployment] Deploying App in DEV"
 	@gcloud app deploy app-dev.yaml
 
+deploy-native nat:
+	@echo "[DEV][App Engine Deployment] Deploying App in DEV"
+	@gcloud app deploy app-native.yaml
+
 run r:
 	@echo "[Running] Running service with $(ENV)"
 	@PORT=$(PORT) GOOGLE_APPLICATION_CREDENTIALS="./google-cloud-service-account.json" JWT_KEY="$(JWT_KEY)" PROJECT_ID="$(PROJECT_ID)" GOOGLE_CLIENT_SECRET="$(GOOGLE_CLIENT_SECRET)" GOOGLE_CLIENT_ID="$(GOOGLE_CLIENT_ID)" node src/start.js

@@ -31,7 +31,7 @@ exports.currentUser = async (req, res) => {
           // Search in the DB for the user.
           const {user: userInfo} = await getUser(user);
           console.log('[iOLED-API][GET][user][currentUser][Response]', userInfo);
-          res.status(200).send({currentUser: userInfo});
+          res.status(200).send([userInfo]);
         } catch (err) {
           console.log('[iOLED-API][GET][user][currentUser][Error]', err);
           res.status(500).json(err);
@@ -68,7 +68,7 @@ exports.getDevices = async (req, res) => {
           const devices = await getDevices(user);
 
           console.log('[iOLED-API][GET][user][getDevices][Response]', devices);
-          res.status(200).send({userDevices: devices});
+          res.status(200).send({devices});
         } catch (err) {
           console.log('[iOLED-API][GET][user][getDevices][Error]', err);
           res.status(500).json(err);
